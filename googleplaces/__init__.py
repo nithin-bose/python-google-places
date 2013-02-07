@@ -168,7 +168,7 @@ class GooglePlaces(object):
                     Places (default []).
         pagetoken-- Returns the next 20 results from a previously run search.
                     Setting a pagetoken parameter will execute a search with
-                    the same parameters used previously — all parameters other
+                    the same parameters used previously - all parameters other
                     than pagetoken will be ignored.
         """
         if location is None and lat_lng is None:
