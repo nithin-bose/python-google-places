@@ -66,7 +66,7 @@ def geocode_location(location, sensor=False):
     if geo_response['status'] == GooglePlaces.RESPONSE_STATUS_ZERO_RESULTS:
         error_detail = ('Lat/Lng for location \'%s\' can\'t be determined.' %
                         location)
-        raise GooglePlacesError, error_detail
+        raise GooglePlacesError(error_detail)
     return geo_response['results'][0]['geometry']['location']
 
 def _get_place_details(reference, api_key, sensor=False):
@@ -88,7 +88,7 @@ def _validate_response(url, response):
                                   GooglePlaces.RESPONSE_STATUS_ZERO_RESULTS]:
         error_detail = ('Request to URL %s failed with response code: %s' %
                         (url, response['status']))
-        raise GooglePlacesError, error_detail
+        raise GooglePlacesError(error_detail)
 
 
 class GooglePlacesError(Exception):
@@ -138,7 +138,7 @@ class GooglePlaces(object):
 
     def query(self, language=lang.ENGLISH, keyword=None, location=None,
                lat_lng=None, name=None, radius=3200, rankby=ranking.PROMINENCE,
-               sensor=False, types=[], pagetoken = None):
+               sensor=False, types=[], pagetoken=None):
         """Perform a search using the Google Places API.
 
         One of either location or lat_lng are required, the rest of the keyword
@@ -540,4 +540,4 @@ class Place(object):
         if self._details is None:
             error_detail = ('The attribute requested is only available after ' +
                     'an explicit call to get_details() is made.')
-            raise GooglePlacesAttributeError, error_detail
+            raise GooglePlacesAttributeError(error_detail)
